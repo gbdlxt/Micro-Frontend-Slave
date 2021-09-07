@@ -1,4 +1,3 @@
-import { inject } from "@vue/runtime-core";
 import { HttpClient } from "./http-client";
 
 export class Example extends HttpClient {
@@ -6,9 +5,12 @@ export class Example extends HttpClient {
     // constructor() {
     //     super();
     // }
+    constructor() {
+        super();
+    }
 
-    getDevices() {
-        const url = 'xxx/xxx/xx';
+    getDevices(): Promise<any> {
+        const url = '/config.json';
         return this.get(url);
     }
 }

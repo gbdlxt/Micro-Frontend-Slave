@@ -1,10 +1,16 @@
-import { AxiosStatic } from 'axios'
+import axios, { AxiosInstance } from 'axios'
 export abstract class HttpClient {
-    constructor(private axios: AxiosStatic, private session: any){}
+    private axios: AxiosInstance;
+    constructor(){
+        this.axios = axios.create({
+            baseURL: 'http://localhost:8001',
+            headers: {'Content-Type': 'application/json'},
+        });
+    }
 
-    get(path: string) {
+    get(path: string): Promise<any> {
         //TODO Add Headers
-        this.axios.get(path).then(rsp=>rsp).catch(err=>err);
+        return this.axios.get(path).then(rsp=>rsp).catch(err=>err);
     }
 
     post(path: string, paras:any = {}): Promise<any> {
@@ -23,7 +29,7 @@ export abstract class HttpClient {
     private getDefaultHeaders() {}
     private checkAuth() {
         // TODO Check auth from cache.
-        this.session.getToken();
+        // this.session.getToken();
     }
     private handlerError() {}
 }

@@ -19,7 +19,6 @@ function render(props: any = {}): void {
     instance = createApp(App);
     instance.use(router);
     instance.use(i18n);
-    
     instance.mount(container? container.querySelector('#app'): '#app');
 }
 
